@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todoey/widgets/tasks_list.dart';
+import 'add_task_screen.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
@@ -7,7 +9,18 @@ class TasksScreen extends StatelessWidget {
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
-        onPressed: (){},
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) {
+                return SingleChildScrollView(
+                  child: AddTaskScreen(),
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                );
+              });
+        },
         child: Icon(Icons.add),
       ),
       body: SafeArea(
@@ -54,6 +67,7 @@ class TasksScreen extends StatelessWidget {
             ),
             Expanded(
               child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.0),
@@ -61,6 +75,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                   color: Colors.white,
                 ),
+                child: TasksList(),
               ),
             ),
           ],
